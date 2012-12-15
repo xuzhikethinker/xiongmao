@@ -93,26 +93,26 @@
       <scope>compile</scope>
     </dependency>
 	<dependency>
-		<groupId>net.sf.jung</groupId>
-		<artifactId>jung-api</artifactId>
+		<groupId>xiongmao</groupId>
+		<artifactId>xiongmao-api</artifactId>
 		<version>${project.version}</version>
 		<scope>compile</scope>
 	</dependency>
 	<dependency>
-		<groupId>net.sf.jung</groupId>
-		<artifactId>jung-algorithms</artifactId>
+		<groupId>xiongmao</groupId>
+		<artifactId>xiongmao-algorithms</artifactId>
 		<version>${project.version}</version>
 		<scope>compile</scope>
 	</dependency>
 	<dependency>
-		<groupId>net.sf.jung</groupId>
-		<artifactId>jung-visualization</artifactId>
+		<groupId>xiongmao</groupId>
+		<artifactId>xiongmao-visualization</artifactId>
 		<version>${project.version}</version>
 		<scope>compile</scope>
 	</dependency>
 	<dependency>
-		<groupId>net.sf.jung</groupId>
-		<artifactId>jung-graph-impl</artifactId>
+		<groupId>xiongmao</groupId>
+		<artifactId>xiongmao-graph-impl</artifactId>
 		<version>${project.version}</version>
 		<scope>compile</scope>
 	</dependency>
