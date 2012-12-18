@@ -159,7 +159,7 @@ public class SpringLayout<V, E> extends AbstractLayout<V,E> implements Iterative
 
     		try {
     			for(E e : graph.getEdges()) {
-    				SpringEdgeData<E> sed = getSpringData(e);
+    				SpringEdgeData<E> sed = getESpringData(e);
     				calcEdgeLength(sed, lengthFunction);
     			}
     		} catch(ConcurrentModificationException cme) {
@@ -184,7 +184,7 @@ public class SpringLayout<V, E> extends AbstractLayout<V,E> implements Iterative
     	step++;
     	try {
     		for(V v : getGraph().getVertices()) {
-    			SpringVertexData svd = getSpringData(v);
+    			SpringVertexData svd = getVSpringData(v);
 //    			System.err.println("svd = "+svd);
     			if (svd == null) {
     				continue;
@@ -219,12 +219,12 @@ public class SpringLayout<V, E> extends AbstractLayout<V,E> implements Iterative
     			Point3f p1 = transform(v1);
     			Point3f p2 = transform(v2);
     			if(p1 == null || p2 == null) continue;
-    			double vx = p1.getX() - p2.getX();
-    			double vy = p1.getY() - p2.getY();
-    			double vz = p1.getZ() - p2.getZ();
+    			double vx = p1.x - p2.x;
+    			double vy = p1.y - p2.y;
+    			double vz = p1.z - p2.z;
     			double len = Math.sqrt(vx * vx + vy * vy + vz * vz);
 
-    			SpringEdgeData<E> sed = getSpringData(e);
+    			SpringEdgeData<E> sed = getESpringData(e);
     			if (sed == null) {
     				continue;
     			}
@@ -243,8 +243,8 @@ public class SpringLayout<V, E> extends AbstractLayout<V,E> implements Iterative
     			double dy = f * vy;
     			double dz = f * vz;
     			SpringVertexData v1D, v2D;
-    			v1D = getSpringData(v1);
-    			v2D = getSpringData(v2);
+    			v1D = getVSpringData(v1);
+    			v2D = getVSpringData(v2);
 
     			sed.f = f;
 
@@ -265,7 +265,7 @@ public class SpringLayout<V, E> extends AbstractLayout<V,E> implements Iterative
         for (V v : getGraph().getVertices()) {
             if (isLocked(v)) continue;
 
-            SpringVertexData svd = getSpringData(v);
+            SpringVertexData svd = getVSpringData(v);
             if(svd == null) continue;
             double dx = 0, dy = 0, dz = 0;
 
@@ -274,9 +274,9 @@ public class SpringLayout<V, E> extends AbstractLayout<V,E> implements Iterative
                 Point3f p = transform(v);
                 Point3f p2 = transform(v2);
                 if(p == null || p2 == null) continue;
-                double vx = p.getX() - p2.getX();
-                double vy = p.getY() - p2.getY();
-                double vz = p.getZ() - p2.getZ();
+                double vx = p.x - p2.x;
+                double vy = p.y - p2.y;
+                double vz = p.z - p2.z;
                 double distance = vx * vx + vy * vy + vz * vz;
                 if (distance == 0) {
                     dx += Math.random();
@@ -308,7 +308,7 @@ public class SpringLayout<V, E> extends AbstractLayout<V,E> implements Iterative
             try {
                 for (V v : getGraph().getVertices()) {
                     if (isLocked(v)) continue;
-                    SpringVertexData vd = getSpringData(v);
+                    SpringVertexData vd = getVSpringData(v);
                     if(vd == null) continue;
                     Point3f xyd = transform(v);
                     
@@ -318,29 +318,29 @@ public class SpringLayout<V, E> extends AbstractLayout<V,E> implements Iterative
                     
                     // keeps nodes from moving any faster than 5 per time unit
                     xyd.set(
-                    		(float)(xyd.getX()+Math.max(-5, Math.min(5, vd.dx))),
-                    		(float)(xyd.getY()+Math.max(-5, Math.min(5, vd.dy))),
-                    		(float)(xyd.getZ()+Math.max(-5, Math.min(5, vd.dz))));
+                    		(float)(xyd.x+Math.max(-5, Math.min(5, vd.dx))),
+                    		(float)(xyd.y+Math.max(-5, Math.min(5, vd.dy))),
+                    		(float)(xyd.z+Math.max(-5, Math.min(5, vd.dz))));
                     
                     BoundingSphere d = getSize();
                     float radius = (float) d.getRadius();
                     
-                    if (xyd.getX() < -radius) {
-                        xyd.set(-radius, xyd.getY(), xyd.getZ());//                     setX(0);
-                    } else if (xyd.getX() > radius) {
-                        xyd.set(radius, xyd.getY(), xyd.getZ());             //setX(width);
+                    if (xyd.x < -radius) {
+                        xyd.set(-radius, xyd.y, xyd.z);//                     setX(0);
+                    } else if (xyd.x > radius) {
+                        xyd.set(radius, xyd.y, xyd.z);             //setX(width);
                     }
                     
-                    if (xyd.getY() < -radius) {
-                        xyd.set(xyd.getX(),-radius, xyd.getZ());//setY(0);
-                    } else if (xyd.getY() > radius) {
-                        xyd.set(xyd.getX(), radius, xyd.getZ());      //setY(height);
+                    if (xyd.y < -radius) {
+                        xyd.set(xyd.x,-radius, xyd.z);//setY(0);
+                    } else if (xyd.y > radius) {
+                        xyd.set(xyd.x, radius, xyd.z);      //setY(height);
                     }
                     
-                    if (xyd.getZ() < -radius) {
-                        xyd.set(xyd.getX(), xyd.getY(), -radius);//setY(0);
-                    } else if (xyd.getZ() > radius) {
-                        xyd.set(xyd.getX(), xyd.getY(), radius);      //setY(height);
+                    if (xyd.z < -radius) {
+                        xyd.set(xyd.x, xyd.y, -radius);//setY(0);
+                    } else if (xyd.z > radius) {
+                        xyd.set(xyd.x, xyd.y, radius);      //setY(height);
                     }
                     
 //                    System.err.println(v+" xyd = "+xyd);
@@ -352,11 +352,11 @@ public class SpringLayout<V, E> extends AbstractLayout<V,E> implements Iterative
         }
     }
 
-    public SpringVertexData getSpringData(V v) {
+    public SpringVertexData getVSpringData(V v) {
         return springVertexData.get(v);
     }
 
-    public SpringEdgeData<E> getSpringData(E e) {
+    public SpringEdgeData<E> getESpringData(E e) {
             return springEdgeData.get(e);
     }
 

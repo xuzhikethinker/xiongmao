@@ -187,7 +187,7 @@ public abstract class AbstractLayout<V, E> implements Layout<V,E> {
 	 */
 	public double getX(V v) {
         assert getCoordinates(v) != null : "Cannot getX for an unmapped vertex "+v;
-        return getCoordinates(v).getX();
+        return getCoordinates(v).x;
 	}
 
 	/**
@@ -197,7 +197,7 @@ public abstract class AbstractLayout<V, E> implements Layout<V,E> {
 	 */
 	public double getY(V v) {
         assert getCoordinates(v) != null : "Cannot getY for an unmapped vertex "+v;
-        return getCoordinates(v).getY();
+        return getCoordinates(v).y;
 	}
 	
     /**
@@ -215,7 +215,7 @@ public abstract class AbstractLayout<V, E> implements Layout<V,E> {
 	 */
 	protected void offsetVertex(V v, float xOffset, float yOffset, float zOffset) {
 		Point3f c = getCoordinates(v);
-        c.set(c.getX()+xOffset, c.getY()+yOffset, c.getZ()+zOffset);
+        c.set(c.x+xOffset, c.y+yOffset, c.z+zOffset);
 		setLocation(v, c);
 	}
 

@@ -45,7 +45,6 @@ import javax.vecmath.Vector3f;
 import org.apache.commons.collections15.BidiMap;
 import org.apache.commons.collections15.bidimap.DualHashBidiMap;
 
-import com.sun.j3d.utils.behaviors.mouse.MouseWheelZoom;
 import com.sun.j3d.utils.geometry.Primitive;
 import com.sun.j3d.utils.picking.PickTool;
 import com.sun.j3d.utils.picking.behaviors.PickingCallback;
@@ -61,6 +60,7 @@ import edu.uci.ics.jung.visualization.picking.MultiPickedState;
 import edu.uci.ics.jung.visualization.picking.PickedState;
 import edu.uci.ics.jung.visualization3d.control.MouseRotate;
 import edu.uci.ics.jung.visualization3d.control.MouseTranslate;
+import edu.uci.ics.jung.visualization3d.control.MouseWheelZoom;
 import edu.uci.ics.jung.visualization3d.control.PickSphereBehavior;
 import edu.uci.ics.jung.visualization3d.control.PickTranslateBehavior;
 import edu.uci.ics.jung.visualization3d.layout.LayoutEventBroadcaster;
@@ -360,7 +360,7 @@ public class VisualizationViewer<V,E> extends JPanel {
 			public void stateChanged(ChangeEvent e) {
 				for(V v : vertexMap.keySet()) {
 					Point3f p = VisualizationViewer.this.layout.transform(v);
-					Vector3f pv = new Vector3f(p.getX(), p.getY(), p.getZ());
+					Vector3f pv = new Vector3f(p.x, p.y, p.z);
 					Transform3D tx = new Transform3D();
 					tx.setTranslation(pv);
 					vertexMap.get(v).setTransform(tx);

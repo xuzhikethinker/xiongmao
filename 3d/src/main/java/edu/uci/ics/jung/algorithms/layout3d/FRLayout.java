@@ -188,9 +188,9 @@ public class FRLayout<V, E> extends AbstractLayout<V, E> implements IterativeCon
         
         xyd.add(newDisp);
         
-//        xyd.set((float)(xyd.getX()+newXDisp), 
-//        		(float)(xyd.getY()+newYDisp), 
-//        		(float)(xyd.getZ()+newZDisp));
+//        xyd.set((float)(xyd.x+newXDisp), 
+//        		(float)(xyd.y+newYDisp), 
+//        		(float)(xyd.z+newZDisp));
 //        System.err.println("newXDisp="+newXDisp+",newYDisp="+newYDisp+",newZDisp="+newZDisp);
 //        System.err.println(v+" set to "+xyd);
 
@@ -207,11 +207,11 @@ public class FRLayout<V, E> extends AbstractLayout<V, E> implements IterativeCon
         }
             
         
-        xyd.set((float)Math.min(Math.max(xyd.getX(), min_pos[0]), max_pos[0]), 
-                (float)Math.min(Math.max(xyd.getY(), min_pos[1]), max_pos[1]),
-                (float)Math.min(Math.max(xyd.getZ(), min_pos[2]), max_pos[2]));
+        xyd.set((float)Math.min(Math.max(xyd.x, min_pos[0]), max_pos[0]), 
+                (float)Math.min(Math.max(xyd.y, min_pos[1]), max_pos[1]),
+                (float)Math.min(Math.max(xyd.z, min_pos[2]), max_pos[2]));
         
-//        double newXPos = xyd.getX();
+//        double newXPos = xyd.x;
 //        if (newXPos < min) {
 //            newXPos = min + Math.random() * borderWidth * 2.0;
 //        } else if (newXPos > max) {
@@ -219,7 +219,7 @@ public class FRLayout<V, E> extends AbstractLayout<V, E> implements IterativeCon
 //                    * borderWidth * 2.0;
 //        }
 //
-//        double newYPos = xyd.getY();
+//        double newYPos = xyd.y;
 //        if (newYPos < min) {
 //            newYPos = min + Math.random() * borderWidth * 2.0;
 //        } else if (newYPos > max) {
@@ -227,7 +227,7 @@ public class FRLayout<V, E> extends AbstractLayout<V, E> implements IterativeCon
 //                    - Math.random() * borderWidth * 2.0;
 //        }
 //
-//        double newZPos = xyd.getZ();
+//        double newZPos = xyd.z;
 //        if (newZPos < min) {
 //            newZPos = min + Math.random() * borderWidth * 2.0;
 //        } else if (newZPos > max) {
@@ -247,9 +247,9 @@ public class FRLayout<V, E> extends AbstractLayout<V, E> implements IterativeCon
         Point3f p1 = transform(v1);
         Point3f p2 = transform(v2);
         if(p1 == null || p2 == null) return;
-//        double xDelta = p1.getX() - p2.getX();
-//        double yDelta = p1.getY() - p2.getY();
-//        double zDelta = p1.getZ() - p2.getZ();
+//        double xDelta = p1.x - p2.x;
+//        double yDelta = p1.y - p2.y;
+//        double zDelta = p1.z - p2.z;
         
         Vector3f delta = new Vector3f();
         delta.negate(p2); 
@@ -300,9 +300,9 @@ public class FRLayout<V, E> extends AbstractLayout<V, E> implements IterativeCon
                     Point3f p2 = transform(v2);
                     if(p1 == null || p2 == null) continue;
 
-//                    double xDelta = p1.getX() - p2.getX();
-//                    double yDelta = p1.getY() - p2.getY();
-//                    double zDelta = p1.getZ() - p2.getZ();
+//                    double xDelta = p1.x - p2.x;
+//                    double yDelta = p1.y - p2.y;
+//                    double zDelta = p1.z - p2.z;
 
                     Vector3f delta = new Vector3f();
                     delta.negate(p2); 
@@ -375,15 +375,15 @@ public class FRLayout<V, E> extends AbstractLayout<V, E> implements IterativeCon
 //        }
 //
 //        public double getXDisp() {
-//            return disp.getX();
+//            return disp.x;
 //        }
 //
 //        public double getYDisp() {
-//            return disp.getY();
+//            return disp.y;
 //        }
 //        
 //        public double getZDisp() {
-//        	return disp.getZ();
+//        	return disp.z;
 //        }
 //
 //        public void setDisp(float x, float y, float z) {
